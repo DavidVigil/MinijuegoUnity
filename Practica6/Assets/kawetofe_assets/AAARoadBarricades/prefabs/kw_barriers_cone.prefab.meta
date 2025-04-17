@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f86e73b6642ff254cac331ce6e5bfb89
+labels:
+- Prop
+- Road
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: kw_barriers
+  assetBundleVariant: cone
+AssetOrigin:
+  serializedVersion: 1
+  productId: 142191
+  packageName: AAA Quality - Road Barricades
+  packageVersion: 1.0
+  assetPath: Assets/kawetofe_assets/AAARoadBarricades/prefabs/kw_barriers_cone.prefab
+  uploadId: 301282
