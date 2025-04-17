@@ -27,7 +27,6 @@ public class MoveWay : MonoBehaviour
     //Sistema de la explosión
     public ParticleSystem explosionFX;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -40,19 +39,15 @@ public class MoveWay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cayendo) return; // ¡Esto es importante!
-
+        if (cayendo) return; 
         float distance=Vector3.Distance(pathFollow[way].path_objs[currentWayPointID].position,transform.position);
         transform.position=Vector3.MoveTowards (transform.position,pathFollow[way].path_objs[currentWayPointID].position,Time.deltaTime*speed);
         var Rotation=Quaternion.LookRotation(pathFollow[way].path_objs[currentWayPointID].position-transform.position);
         transform.rotation=Quaternion.Slerp(transform.rotation,Rotation,Time.deltaTime*rotSpeed);
-
-
         if(distance<=reachDistance)
         {
             currentWayPointID++;
         }
-
         if(currentWayPointID>=pathFollow[way].path_objs.Count)
         {
             currentWayPointID= Random.Range(0, pathFollow[1].path_objs.Count);
@@ -61,7 +56,6 @@ public class MoveWay : MonoBehaviour
     void OnMouseDown()
     {
         if (cayendo) return;
-
         toqueCount++;
         speed += 15.0f;
         if (way == 0)
@@ -79,10 +73,8 @@ public class MoveWay : MonoBehaviour
         {
             StopCoroutine(tambaleoActivo);
         }
-
         tambaleoActivo = StartCoroutine(Tambalear());
-
-        if (toqueCount >= 3)
+        if (toqueCount > 3)
         {
             StartCoroutine(CaerAvion());
         }
@@ -100,7 +92,6 @@ public class MoveWay : MonoBehaviour
             transform.rotation = Quaternion.Lerp(rotInicial, rotIzquierda, t);
             yield return null;
         }
-
         t = 0;
         while (t < 1)
         {
@@ -108,7 +99,6 @@ public class MoveWay : MonoBehaviour
             transform.rotation = Quaternion.Lerp(rotIzquierda, rotDerecha, t);
             yield return null;
         }
-
         t = 0;
         while (t < 1)
         {
@@ -120,7 +110,6 @@ public class MoveWay : MonoBehaviour
     IEnumerator CaerAvion()
     {
         cayendo = true;
-
         float alturaInicial = transform.position.y;
         float velocidadCaida = 2f;
 
@@ -143,13 +132,11 @@ public class MoveWay : MonoBehaviour
 
         // Asegurar que termine completamente disuelto
         material.SetFloat("_DissolveStrength", 1f);
-        //Debug.Log("Avión desintegrado al llegar al suelo");
         
         if (explosionFX != null)
         {
             explosionFX.transform.position = transform.position;
             explosionFX.Play();
         }
-
     }
 }
